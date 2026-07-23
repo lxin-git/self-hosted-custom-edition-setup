@@ -5,6 +5,7 @@ This repository contains scripts and configuration files to deploy Instana Self-
 ## Table of Contents
 
 1. [Overview](#overview)
+   - [POWER Installation Guide](#power-installation-guide)
 2. [Prerequisites](#prerequisites)
     - [Helm](#helm)
     - [Storageclass](#storageclass)
@@ -39,6 +40,10 @@ This repository contains scripts and configuration files to deploy Instana Self-
 ## Overview
 
 The Instana Self-Hosted Custom Edition setup uses Helm charts to deploy various components on Kubernetes clusters. The deployment is orchestrated by shell scripts that apply the configuration values to the Helm charts.
+
+### POWER Installation Guide
+
+For POWER architecture deployments, follow the [POWER Installation Guide](POWER.md). It lists all required Docker images and the corresponding `custom_values.yaml` configuration snippets needed before running the install script.
 
 ## Prerequisites
 
