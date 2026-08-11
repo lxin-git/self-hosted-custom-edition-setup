@@ -254,7 +254,7 @@ install_instana_unit() {
   install_instana_registry instana-units
 
   info "Downloading the license file to license ..."
-  license_content=$(curl -H "Content-Type: text/plain" -s "https://instana.io/onprem/license/download?salesId=$SALES_KEY")
+  license_content=$(curl -H "Content-Type: text/plain" -s "https://instana.io/onprem/license/download/v2/allValid?salesId=$SALES_KEY")
 
   local file_args
   read -ra file_args <<<"$(generate_helm_file_arguments unit)"
