@@ -267,11 +267,19 @@ install_instana_unit() {
     --set-string cleanupJob.image.registry="${registry_url}"
   )
 
+  # Build --set-literal args for each license entry
+  local license_args=()
+  local i=0
+  while IFS= read -r lic; do
+    license_args+=(--set-literal "licenses[$i]=$lic")
+    (( i++ ))
+  done < <(yq -r '.[]' <<< "$license_content")
+
   helm_upgrade "${INSTANA_UNIT_NAME}-${INSTANA_TENANT_NAME}" "instana/instana-unit" "instana-units" "${INSTANA_UNIT_CHART_VERSION}" \
     --set tenantName="${INSTANA_TENANT_NAME}" \
     --set unitName="${INSTANA_UNIT_NAME}"\
-    --set licenses="{$license_content}" \
     --set-literal downloadKey="$DOWNLOAD_KEY" \
+    "${license_args[@]}" \
     "${cleanup_job_args[@]}" \
     ${AGENT_KEY:+--set agentKeys="{$AGENT_KEY}"} \
     "${file_args[@]}"
