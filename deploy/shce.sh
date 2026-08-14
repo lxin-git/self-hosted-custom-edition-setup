@@ -272,7 +272,7 @@ install_instana_unit() {
   local i=0
   while IFS= read -r lic; do
     license_args+=(--set-literal "licenses[$i]=$lic")
-    (( i++ ))
+    i=$((i + 1))
   done < <(yq -r '.[]' <<< "$license_content")
 
   helm_upgrade "${INSTANA_UNIT_NAME}-${INSTANA_TENANT_NAME}" "instana/instana-unit" "instana-units" "${INSTANA_UNIT_CHART_VERSION}" \
